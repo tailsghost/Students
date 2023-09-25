@@ -3,10 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Students.Views.Windows"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:vm="clr-namespace:Students.Views"
+        xmlns:viewModel="clr-namespace:Students.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="" Height="450" Width="800">
 
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Файл">
+                    <MenuItem Header="Выход"/>
+                </MenuItem>
+                <MenuItem Header="О приложении">
+                    <MenuItem Header="О нас"/>
+                </MenuItem>
+            </Menu>
+            <StatusBar DockPanel.Dock="Bottom"/>
+            <TabControl>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Regular_FileAlt" Height="13" Margin="0 0 5 0" Foreground="Yellow"/>
+                            <TextBlock Text="Вкладка 1"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="6*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        </Grid>
+
+                </TabItem>
+                <TabItem Header="График" >
+                </TabItem>
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>
+
