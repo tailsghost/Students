@@ -24,24 +24,22 @@
             </Menu>
             <StatusBar DockPanel.Dock="Bottom"/>
             <TabControl>
-                <TabItem>
+                <TabItem >
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Icon="Regular_FileAlt" Height="13" Margin="0 0 5 0" Foreground="Yellow"/>
-                            <TextBlock Text="Вкладка 1"/>
-                        </StackPanel>
+                        <DockPanel>
+                            <fa:FontAwesome Icon="Brands_Dev" Foreground="Lime"/>
+                            <TextBlock Text="Студенты"/>
+                        </DockPanel>
                     </TabItem.Header>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="6*"/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
                             <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
-                        </Grid>
-
+                        <GroupBox Header="Группы">
+                            <ListBox ItemsSource="{Binding Groups}"/>
+                        </GroupBox>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="График" >
                 </TabItem>
