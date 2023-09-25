@@ -36,8 +36,14 @@
                             <ColumnDefinition Width="250"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <GroupBox Header="Группы">
-                            <ListBox ItemsSource="{Binding Groups}"/>
+                        <GroupBox Header="Группы" Grid.Column="0">
+                            <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"
+                                     SelectedItem="{Binding SelectedGroup}"/>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, FallbackValue='Студенты', TargetNullValue='Группа не выбрана'}">
+                            <DataGrid>
+
+                            </DataGrid>
                         </GroupBox>
                     </Grid>
                 </TabItem>

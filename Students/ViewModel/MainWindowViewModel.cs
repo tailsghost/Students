@@ -9,7 +9,9 @@ namespace Students.ViewModel;
     [ObservableObject]
     internal partial class MainWindowViewModel
     {
-        [ObservableProperty] public ObservableCollection<Group> _groups;
+        [ObservableProperty] private ObservableCollection<Group> _groups;
+
+        [ObservableProperty] private Group _selectedGroup;
 
         public MainWindowViewModel()
         {
@@ -26,7 +28,8 @@ namespace Students.ViewModel;
             var group = Enumerable.Range(1, 20).Select(i => new Group
             {
                 Name = $"Группа {i}",
-                Students = new ObservableCollection<Student>(student)
+                Students = new ObservableCollection<Student>(student),
+                
             });
 
             Groups = new ObservableCollection<Group>(group);
