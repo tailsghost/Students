@@ -20,9 +20,10 @@ namespace Students.ViewModel;
             {
                 Name = $"Name {student_index}",
                 Surname = $"Surname {student_index}",
-                Patronymic = $"Patronymic {student_index++}",
+                Patronymic = $"Patronymic {student_index}",
                 Birthday = DateTime.Now,
-                Rating = 0
+                Rating = 0,
+                Description = $"Description {student_index++}"
             });
 
             var group = Enumerable.Range(1, 20).Select(i => new Group

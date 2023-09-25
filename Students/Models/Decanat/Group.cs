@@ -15,5 +15,7 @@ internal partial class Group
 
     [ObservableProperty] public ICollection<Student> _students;
 
+    public string Description { get; set; }
+
 }
 
