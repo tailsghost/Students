@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Students.Models.Decanat;
 
 namespace Students.ViewModel;
@@ -41,6 +42,36 @@ namespace Students.ViewModel;
             Groups = new ObservableCollection<Group>(group);
 
             CompositeCollection = new() { "Hello Word", 42, Groups[1], group, };
+        }
+
+
+
+
+
+
+
+
+
+        [RelayCommand]
+        private void onCreateGroup()
+        {
+            var max_group = Groups.Count + 1;
+            var new_group = new Group
+            {
+                Name = $"Группа {max_group}",
+                Students = new ObservableCollection<Student>()
+            };
+
+            Groups.Add(new_group);
+        }
+
+        [RelayCommand]
+        private void onDeleteGroup()
+        {
+            if (Groups.Contains(_selectedGroup))
+            {
+                Groups.Remove(_selectedGroup);
+            }
         }
     }
 
