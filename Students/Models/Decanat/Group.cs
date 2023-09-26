@@ -13,9 +13,10 @@ internal partial class Group
 {
     [ObservableProperty] public string _name;
 
-    [ObservableProperty] public ICollection<Student> _students;
+    [ObservableProperty] public IList<Student> _students;
 
     public string Description { get; set; }
+
 
 }
 

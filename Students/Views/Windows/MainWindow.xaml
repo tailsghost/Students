@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:Students.Views"
         xmlns:viewModel="clr-namespace:Students.ViewModel"
         xmlns:decanat="clr-namespace:Students.Models.Decanat"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="" Height="450" Width="800">
 
@@ -38,8 +39,17 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <GroupBox Header="Группы" Grid.Column="0">
-                            <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"
-                                     SelectedItem="{Binding SelectedGroup}"/>
+                            <ListBox ItemsSource="{Binding Groups}"
+                                     SelectedItem="{Binding SelectedGroup}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="decanat:Group">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" Margin="0 0 5 0"/>
+                                            <TextBlock Text="{Binding Students.Count, StringFormat=[Студентов: {0}]}"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </GroupBox>
                         <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, FallbackValue='Студенты', TargetNullValue='Группа не выбрана'}">
                             <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False" CanUserAddRows="False"
@@ -76,7 +86,62 @@
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem Header="График" >
+                <TabItem Header="Разнородные данные" Height="20" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox>
+                            <GroupBox.Header>
+                                <TextBlock Text="Элементы"></TextBlock>
+                            </GroupBox.Header>
+                            <GroupBox.Resources>
+                                <DataTemplate DataType="{x:Type decanat:Group}">
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type decanat:Student}">
+                                    <TextBlock Text="{Binding Name, StringFormat=Студент {0}}"></TextBlock>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type sys:String}">
+                                    <TextBlock>
+                                        Строка: <TextBlock Text="{Binding}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type sys:Int32}">
+                                    <TextBlock>
+                                        Число: <TextBlock Text="{Binding}"></TextBlock>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GroupBox.Resources>
+                            <ListBox ItemsSource="{Binding CompositeCollection}" SelectedItem="{Binding SelectedCompositeValue}"></ListBox>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1">
+                            <GroupBox.Header>
+                                <TextBlock Text="Выбранный элемент"></TextBlock>
+                            </GroupBox.Header>
+                            <GroupBox.Resources>
+                                <DataTemplate DataType="{x:Type decanat:Group}">
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type decanat:Student}">
+                                    <TextBlock Text="{Binding Name, StringFormat=Студент {0}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"></TextBlock>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type sys:String}">
+                                    <TextBlock>
+                                        Строка: <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type sys:Int32}">
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30">
+                                        Число: <TextBlock Text="{Binding}"></TextBlock>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GroupBox.Resources>
+                            <ContentControl Content="{Binding SelectedCompositeValue}"></ContentControl>
+                        </GroupBox>
+                    </Grid>
+                    
                 </TabItem>
             </TabControl>
         </DockPanel>
