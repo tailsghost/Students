@@ -41,8 +41,13 @@
                         <GroupBox Header="Группы" Grid.Column="0">
                             <DockPanel>
                                 <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0, 3">
-                                    <Button Content="Удалить" Margin="3, 0" Command="{Binding onDeleteGroupCommand}"/>
-                                    <Button Content="Добавить" Margin="3 0" Command="{Binding onCreateGroupCommand}"/>
+                                    <UniformGrid.Resources>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Margin" Value="3 0"></Setter>
+                                        </Style>
+                                    </UniformGrid.Resources>
+                                    <Button Content="Удалить"  Command="{Binding onDeleteGroupCommand}"/>
+                                    <Button Content="Добавить"  Command="{Binding onCreateGroupCommand}"/>
                                 </UniformGrid>
                                 <ListBox ItemsSource="{Binding Groups}"
                                          SelectedItem="{Binding SelectedGroup}">
@@ -103,22 +108,11 @@
                                 <TextBlock Text="Элементы"></TextBlock>
                             </GroupBox.Header>
                             <GroupBox.Resources>
-                                <DataTemplate DataType="{x:Type decanat:Group}">
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type decanat:Student}">
-                                    <TextBlock Text="{Binding Name, StringFormat=Студент {0}}"></TextBlock>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type sys:String}">
-                                    <TextBlock>
-                                        Строка: <TextBlock Text="{Binding}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type sys:Int32}">
-                                    <TextBlock>
-                                        Число: <TextBlock Text="{Binding}"></TextBlock>
-                                    </TextBlock>
-                                </DataTemplate>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="../../Resources/DataTemplates/CompositeListItem.xaml"></ResourceDictionary>
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
                             </GroupBox.Resources>
                             <ListBox ItemsSource="{Binding CompositeCollection}" SelectedItem="{Binding SelectedCompositeValue}"></ListBox>
                         </GroupBox>
@@ -127,22 +121,11 @@
                                 <TextBlock Text="Выбранный элемент"></TextBlock>
                             </GroupBox.Header>
                             <GroupBox.Resources>
-                                <DataTemplate DataType="{x:Type decanat:Group}">
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type decanat:Student}">
-                                    <TextBlock Text="{Binding Name, StringFormat=Студент {0}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"></TextBlock>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type sys:String}">
-                                    <TextBlock>
-                                        Строка: <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type sys:Int32}">
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30">
-                                        Число: <TextBlock Text="{Binding}"></TextBlock>
-                                    </TextBlock>
-                                </DataTemplate>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="../../Resources/DataTemplates/CompositeItemsControl.xaml"></ResourceDictionary>
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
                             </GroupBox.Resources>
                             <ContentControl Content="{Binding SelectedCompositeValue}"></ContentControl>
                         </GroupBox>
